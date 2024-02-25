@@ -94,7 +94,12 @@ export const SignUpScreen = ({navigation}) => {
           dropDownList={locationList}
         />
 
-        <Button mode="contained" onPress={handleSubmit(onSubmit)}>
+        <Button
+          style={{
+            marginVertical: 10,
+          }}
+          mode="contained"
+          onPress={handleSubmit(onSubmit)}>
           Submit
         </Button>
       </View>

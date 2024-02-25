@@ -54,10 +54,22 @@ export const EditScreen = ({navigation}) => {
           rules={{required: 'Location is required'}}
           dropDownList={locationList}
         />
-
-        <Button mode="contained" onPress={handleSubmit(onSubmit)}>
-          Submit
-        </Button>
+        <View
+          style={{
+            marginVertical: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Button
+            style={{
+              marginVertical: 10,
+              width: '50%',
+            }}
+            mode="contained"
+            onPress={handleSubmit(onSubmit)}>
+            Submit
+          </Button>
+        </View>
       </View>
     </View>
   );
