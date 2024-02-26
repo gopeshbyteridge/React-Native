@@ -6,6 +6,7 @@ import {Button, RadioButton} from 'react-native-paper';
 import {CustomRadioBtn} from '../components/radioBtn';
 import DropDown from 'react-native-paper-dropdown';
 import {CustomDropDown} from '../components/dropdownList';
+import {CheckBox} from '../components/CheckBox';
 
 export const SignUpScreen = ({navigation}) => {
   const {
@@ -86,6 +87,11 @@ export const SignUpScreen = ({navigation}) => {
           name={'Radio btn'}
           text={'Accept terms & condtions'}
         />
+
+        <CheckBox
+          control={control}
+          name={'chcekbox'}
+          text={'Accept terms & condtions'}></CheckBox>
 
         <CustomDropDown
           control={control}

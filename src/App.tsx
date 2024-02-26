@@ -14,10 +14,28 @@ function App(): React.JSX.Element {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="LoginScreen">
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-          <Stack.Screen name="EditScreen" component={EditScreen} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{title: ''}}
+          />
+          <Stack.Screen
+            name="SignUpScreen"
+            component={SignUpScreen}
+            options={{
+              title: '',
+            }}
+          />
+          <Stack.Screen
+            name="EditScreen"
+            component={EditScreen}
+            options={{title: ''}}
+          />
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{title: ''}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
