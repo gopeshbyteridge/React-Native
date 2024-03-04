@@ -1,23 +1,41 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import {CustomInput} from '../components/CustomInput';
+import {CustomInput} from '../components/FormInput';
 import {Button, RadioButton} from 'react-native-paper';
 import {CustomRadioBtn} from '../components/radioBtn';
-import DropDown from 'react-native-paper-dropdown';
 import {CustomDropDown} from '../components/dropdownList';
 import {CheckBox} from '../components/CheckBox';
+import {setuser} from '../stores/Redux/UserDetails';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useAppDispatch} from '../stores/Redux/hooks';
+import {RootStackParamList} from '../navigation/navigationTypes';
 
-export const SignUpScreen = ({navigation}) => {
+type SignUpScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'SignUpScreen'
+>;
+
+type Props = {
+  navigation: SignUpScreenNavigationProp;
+};
+
+export const SignUpScreen = ({navigation}: Props) => {
   const {
     control,
     handleSubmit,
     watch,
     formState: {errors},
   } = useForm();
-
-  const onSubmit = () => {};
   const pwd = watch('Password');
+
+  const dispatch = useAppDispatch();
+
+  const onSubmit = (data: any) => {
+    dispatch(setuser(data));
+    navigation.goBack();
+  };
+
   const locationList = [
     {
       label: 'Jaipur',
@@ -40,11 +58,13 @@ export const SignUpScreen = ({navigation}) => {
         <CustomInput
           control={control}
           name={'UserName'}
+          label={'UserName'}
           placeholder={'Username'}
           rules={{required: 'Username is required'}}
         />
 
         <CustomInput
+          label={'Email'}
           control={control}
           name={'Email'}
           placeholder={'Email'}
@@ -52,6 +72,7 @@ export const SignUpScreen = ({navigation}) => {
         />
 
         <CustomInput
+          label={'Password'}
           control={control}
           name={'Password'}
           placeholder={'Password'}
@@ -66,6 +87,7 @@ export const SignUpScreen = ({navigation}) => {
         />
 
         <CustomInput
+          label={'Confirm password'}
           control={control}
           name={'Confirm password'}
           placeholder={'Confirm Password'}
@@ -95,7 +117,7 @@ export const SignUpScreen = ({navigation}) => {
 
         <CustomDropDown
           control={control}
-          name={'DropDown'}
+          name={'Location'}
           rules={{required: 'Location is required'}}
           dropDownList={locationList}
         />

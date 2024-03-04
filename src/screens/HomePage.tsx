@@ -1,13 +1,18 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useForm} from 'react-hook-form';
-import {CustomInput} from '../components/CustomInput';
-import {Button, Text, Card, Icon, Avatar} from 'react-native-paper';
+import {Button, Text, Card, Avatar} from 'react-native-paper';
+import {useAppSelector} from '../stores/Redux/hooks';
+import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
+import {LeftSideNavIcons, RightSideNaveIcons} from '../navigation/NavBar';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-export const HomeScreen = ({navigation}) => {
+const Tab = createMaterialBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const HomeComponent = ({navigation}) => {
+  const user = useAppSelector(state => state.UserDetail);
   return (
     <View style={styles.sectionContainer}>
-      <Text style={styles.loginText}>Home</Text>
       <View style={styles.customInput}>
         <View style={styles.btnContianer}>
           <Card>
@@ -21,16 +26,16 @@ export const HomeScreen = ({navigation}) => {
                 <Text variant="titleLarge">Details</Text>
                 <Avatar.Icon size={24} icon="account" />
               </View>
-              <Text variant="bodyMedium"> UserName: Gopesh </Text>
-              <Text variant="bodyMedium"> Email: Gopeshy@byteridge.com</Text>
-              <Text variant="bodyMedium"> Location: Jaipur</Text>
+              <Text variant="bodyMedium"> UserName: {user.UserName} </Text>
+              <Text variant="bodyMedium"> Email: {user?.Email}</Text>
+              <Text variant="bodyMedium"> Location: {user?.Location}</Text>
             </Card.Content>
             <Card.Actions>
               <Button
                 icon={'account-edit'}
                 style={styles.btn}
                 mode="contained"
-                onPress={() => navigation.navigate('EditScreen')}>
+                onPress={() => console.log()}>
                 Edit Profile
               </Button>
             </Card.Actions>
@@ -38,6 +43,30 @@ export const HomeScreen = ({navigation}) => {
         </View>
       </View>
     </View>
+  );
+};
+
+export const HomeScreen = () => {
+  return (
+    <Stack.Navigator initialRouteName="initialHome">
+      <Stack.Screen
+        name="HomeComponent"
+        component={HomeComponent}
+        options={{
+          title: '',
+          headerShown: true,
+          headerLeft: () => (
+            <LeftSideNavIcons
+              leftIcon={{show: false, name: ''}}
+              title={'Home'}
+            />
+          ),
+          headerRight: () => (
+            <RightSideNaveIcons rightIcon={{show: true, name: ''}} />
+          ),
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 

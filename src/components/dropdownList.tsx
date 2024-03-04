@@ -14,7 +14,6 @@ export const CustomDropDown = ({control, name, rules = {}, dropDownList}) => {
       rules={rules}
       render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
         <>
-          {console.log('value', value)}
           <Dropdown
             placeholder={!showDropDown ? 'Location' : '...'}
             value={value}
@@ -50,7 +49,3 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
   },
 });
-//screen
-//redux tool kit implement
-//realm db
-//api call handling and showing data

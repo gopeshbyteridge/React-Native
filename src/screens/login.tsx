@@ -1,14 +1,24 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useForm} from 'react-hook-form';
-import {CustomInput} from '../components/CustomInput';
+import {CustomInput} from '../components/FormInput';
 import {Button} from 'react-native-paper';
+import {RootStackParamList} from '../navigation/navigationTypes';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-export const LoginScreen = ({navigation}) => {
+type LoginScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'LoginScreen'
+>;
+
+type Props = {
+  navigation: LoginScreenNavigationProp;
+};
+
+export const LoginScreen = ({navigation}: Props) => {
   const {
     control,
     handleSubmit,
-    watch,
     formState: {errors},
   } = useForm();
 
@@ -21,6 +31,7 @@ export const LoginScreen = ({navigation}) => {
       <Text style={styles.loginText}>LOGIN</Text>
       <View style={styles.customInput}>
         <CustomInput
+          label={'Email'}
           control={control}
           name={'Email'}
           placeholder={'Email'}
@@ -30,6 +41,7 @@ export const LoginScreen = ({navigation}) => {
         <CustomInput
           control={control}
           name={'Password'}
+          label={'Password'}
           placeholder={'Password'}
           rules={{
             required: 'Password is required',

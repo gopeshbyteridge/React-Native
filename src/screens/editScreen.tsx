@@ -1,32 +1,48 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import {CustomInput} from '../components/CustomInput';
+import {CustomInput} from '../components/FormInput';
 import {Button, RadioButton} from 'react-native-paper';
 import {CustomDropDown} from '../components/dropdownList';
+import {setuser} from '../stores/Redux/UserDetails';
+import {RootStackParamList} from '../navigation/navigationTypes';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useAppSelector, useAppDispatch} from '../stores/Redux/hooks';
 
-export const EditScreen = ({navigation}) => {
+type EditScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'EditScreen'
+>;
+type Props = {
+  navigation: EditScreenNavigationProp;
+};
+
+export const EditScreen = ({navigation}: Props) => {
+  let user = useAppSelector(state => state.UserDetail);
+
   const {
     control,
     handleSubmit,
     formState: {errors},
   } = useForm();
+  const dispatch = useAppDispatch();
 
-  const onSubmit = () => {
+  const onSubmit = (data: any) => {
+    dispatch(setuser(data));
     navigation.navigate('HomeScreen');
   };
   const locationList = [
     {
       label: 'Jaipur',
-      value: 'jaipur',
+      value: 'Jaipur',
     },
     {
       label: 'Delhi',
-      value: 'delhi',
+      value: 'Delhi',
     },
     {
       label: 'Others',
-      value: 'others',
+      value: 'Others',
     },
   ];
 
@@ -35,6 +51,7 @@ export const EditScreen = ({navigation}) => {
       <Text style={styles.loginText}>EDIT PROFILE</Text>
       <View style={styles.customInput}>
         <CustomInput
+          label={'UserName'}
           control={control}
           name={'UserName'}
           placeholder={'Username'}
@@ -42,6 +59,7 @@ export const EditScreen = ({navigation}) => {
         />
 
         <CustomInput
+          label={'Email'}
           control={control}
           name={'Email'}
           placeholder={'Email'}
@@ -50,7 +68,7 @@ export const EditScreen = ({navigation}) => {
 
         <CustomDropDown
           control={control}
-          name={'DropDown'}
+          name={'Location'}
           rules={{required: 'Location is required'}}
           dropDownList={locationList}
         />
