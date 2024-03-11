@@ -1,0 +1,9 @@
+{
+    "appId": "reactapp-ggtdg",
+    "appUrl": "https://services.cloud.mongodb.com/groups/61f38f8623f50c41872d7685/apps/65e8205f4f870a7e2e369438",
+    "baseUrl": "https://services.cloud.mongodb.com",
+    "clientApiBaseUrl": "https://ap-south-1.aws.services.cloud.mongodb.com",
+    "dataApiBaseUrl": "https://ap-south-1.aws.data.mongodb-api.com",
+    "dataExplorerLink": "https://cloud.mongodb.com/links/61f38f8623f50c41872d7685/explorer/Cluster0/database/collection/find",
+    "dataSourceName": "mongodb-atlas"
+}

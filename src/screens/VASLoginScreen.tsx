@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, View, Image, ImageBackground} from 'react-native';
 import {useForm} from 'react-hook-form';
 import {CustomInput} from '../components/FormInput';
@@ -6,6 +6,7 @@ import {Text} from 'react-native-paper';
 import {CustomBtn} from '../components/btn';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/navigationTypes';
+import {ProfileService} from '../Storage/ProfileService';
 
 type VASLoginScreenNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
@@ -15,10 +16,10 @@ type Props = {
 };
 
 export const VASLoginScreen = ({navigation}: Props) => {
+  let service = new ProfileService();
   const {
     control,
     handleSubmit,
-    watch,
     formState: {errors},
   } = useForm();
 
@@ -26,7 +27,22 @@ export const VASLoginScreen = ({navigation}: Props) => {
     navigation.navigate('SignUpScreen');
   };
 
-  const onLogin = (data: any) => {
+  useEffect(() => {}, []);
+
+  // const tasklists = useObject(
+  //   Profile,
+  //   new BSON.ObjectId('65e71bb3033c340d33f7cffd'),
+  // );
+  // console.log('read profile', tasklists);
+
+  const onLogin = async (data: any) => {
+    // if (data?.Email) {
+    //   await service.addProfile({
+    //     email: data?.Email,
+    //     token: '',
+    //   });
+    // }
+
     navigation.navigate('TabNav');
   };
 

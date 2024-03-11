@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {CustomInput} from '../components/FormInput';
@@ -10,6 +10,10 @@ import {setuser} from '../stores/Redux/UserDetails';
 import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useAppDispatch} from '../stores/Redux/hooks';
 import {RootStackParamList} from '../navigation/navigationTypes';
+import {Profile} from '../Storage/Realm';
+import {useUser, useQuery, useRealm} from '@realm/react';
+
+// const {useQuery, useRealm} = RealmContext;
 
 type SignUpScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -27,12 +31,35 @@ export const SignUpScreen = ({navigation}: Props) => {
     watch,
     formState: {errors},
   } = useForm();
+
+  const realm = useRealm();
+
+  const createRecord = (userData: any) => {
+    realm.write(() => {
+      // let res = realm.create(Profile, {
+      //   Email: userData.Email,
+      //   UserName: userData.UserName,
+      //   Location: userData.Location,
+      // });
+
+      let res = new Profile(realm, {
+        Email: userData.Email,
+        UserName: userData.UserName,
+        Location: userData.UserName,
+      });
+      console.log('res', res);
+      return res;
+    });
+  };
+
   const pwd = watch('Password');
 
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: any) => {
     dispatch(setuser(data));
+    console.log(data);
+    createRecord(data);
     navigation.goBack();
   };
 

@@ -15,6 +15,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
   return (
+    // <AppProvider id="">
+    //   <RealmProvider schema={[Profile]}>
     <Provider store={store}>
       <PaperProvider>
         <SafeAreaView style={styles.container}>
@@ -53,6 +55,8 @@ function App(): React.JSX.Element {
         </SafeAreaView>
       </PaperProvider>
     </Provider>
+    //   </RealmProvider>
+    // </AppProvider>
   );
 }
 
